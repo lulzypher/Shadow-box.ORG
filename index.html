@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>shadow-box.org</title>
+  <meta name="description" content="shadow-box.org — little tools hosted together." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0a0a0c;
+      --fg: #e8e6e3;
+      --muted: #8a8782;
+      --line: rgba(255, 255, 255, 0.08);
+      --panel: rgba(18, 18, 22, 0.72);
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: "DM Sans", system-ui, sans-serif;
+    }
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: clamp(1.25rem, 4vw, 2.75rem);
+      background:
+        radial-gradient(900px 420px at 50% -8%, rgba(120, 110, 90, 0.16), transparent 60%),
+        var(--bg);
+    }
+    .brand {
+      font-size: clamp(0.75rem, 2vw, 0.875rem);
+      font-weight: 600;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0 0 1.25rem;
+    }
+    .hero {
+      width: min(92vw, 720px);
+      margin: 0 auto 1.75rem;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.06),
+        0 24px 80px rgba(0, 0, 0, 0.55);
+    }
+    .hero picture, .hero img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .lede {
+      width: min(92vw, 720px);
+      text-align: center;
+      margin: 0 0 1.75rem;
+    }
+    .lede h1 {
+      margin: 0 0 0.45rem;
+      font-family: "Instrument Serif", Georgia, serif;
+      font-weight: 400;
+      font-size: clamp(1.8rem, 4.5vw, 2.6rem);
+      letter-spacing: -0.02em;
+    }
+    .lede p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.02rem;
+      line-height: 1.45;
+    }
+    .projects {
+      width: min(92vw, 720px);
+      display: grid;
+      gap: 0.65rem;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .projects a {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0.35rem 1rem;
+      align-items: baseline;
+      text-decoration: none;
+      color: inherit;
+      padding: 1rem 1.1rem;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--panel);
+      backdrop-filter: blur(8px);
+      transition: border-color 160ms ease, transform 160ms ease;
+    }
+    .projects a:hover {
+      border-color: rgba(255, 255, 255, 0.22);
+      transform: translateY(-1px);
+    }
+    .projects .title {
+      font-weight: 600;
+      font-size: 1.05rem;
+    }
+    .projects .tag {
+      color: var(--muted);
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      justify-self: end;
+    }
+    .projects .summary {
+      grid-column: 1 / -1;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.4;
+    }
+    .foot {
+      margin-top: 2rem;
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+    .foot code {
+      color: #c9c4ba;
+    }
+  </style>
+</head>
+<body>
+  <p class="brand">shadow-box.org</p>
+  <figure class="hero" aria-label="Welcome">
+    <picture>
+      <source media="(max-width: 768px)" srcset="/main2.jpg" type="image/jpeg" />
+      <img src="/main.jpg" alt="shadow-box.org" />
+    </picture>
+  </figure>
+  <header class="lede">
+    <h1>Little projects, one roof.</h1>
+    <p>Drop new tools into the hub — they show up here.</p>
+  </header>
+  <ul class="projects" id="projects" aria-label="Projects"></ul>
+  <p class="foot">Add apps via <code>public/projects.json</code> + <code>scripts/sync-apps.ps1</code></p>
+  <script>
+    async function loadProjects() {
+      const root = document.getElementById("projects");
+      try {
+        const res = await fetch("/projects.json", { cache: "no-cache" });
+        if (!res.ok) throw new Error("missing registry");
+        const data = await res.json();
+        const items = Array.isArray(data.projects) ? data.projects : [];
+        if (!items.length) {
+          root.innerHTML = "<li style='color:var(--muted)'>No projects registered yet.</li>";
+          return;
+        }
+        root.innerHTML = items.map((p) => `
+          <li>
+            <a href="${p.path}">
+              <span class="title">${p.title}</span>
+              <span class="tag">${p.tag || ""}</span>
+              <span class="summary">${p.summary || ""}</span>
+            </a>
+          </li>
+        `).join("");
+      } catch {
+        root.innerHTML = "<li style='color:var(--muted)'>Could not load projects.json</li>";
+      }
+    }
+    loadProjects();
+  </script>
+</body>
+</html>

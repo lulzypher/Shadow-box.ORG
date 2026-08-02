@@ -1,0 +1,16 @@
+{
+  "name": "shadow-box-org",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "serve": "node static-server.mjs",
+    "sync-apps": "powershell -NoProfile -ExecutionPolicy Bypass -File ./scripts/sync-apps.ps1",
+    "hub": "npm run sync-apps && npm run build"
+  },
+  "devDependencies": {
+    "vite": "^6.3.5"
+  }
+}

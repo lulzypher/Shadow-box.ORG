@@ -1,0 +1,33 @@
+{
+  "source": "manual-export",
+  "note": "Replace with your own export. Dims optional but recommended.",
+  "jobs": [
+    {
+      "file_name": "benchy_0.2mm.gcode.3mf",
+      "status": "completed",
+      "started_at": "2026-07-12T18:22:00Z",
+      "length_mm": 60,
+      "width_mm": 31,
+      "height_mm": 48,
+      "weight_g": 15
+    },
+    {
+      "file_name": "cable_clips_x8.3mf",
+      "status": "completed",
+      "started_at": "2026-07-20T09:05:00Z",
+      "length_mm": 42,
+      "width_mm": 28,
+      "height_mm": 18,
+      "weight_g": 22
+    },
+    {
+      "file_name": "enclosure_panel.3mf",
+      "status": "completed",
+      "started_at": "2026-07-28T21:40:00Z",
+      "length_mm": 180,
+      "width_mm": 120,
+      "height_mm": 8,
+      "weight_g": 95
+    }
+  ]
+}

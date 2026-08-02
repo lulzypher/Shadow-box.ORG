@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fluke fix — shadow-box</title>
+  <style>
+    :root {
+      --bg: #0b0d10;
+      --fg: #e8ecef;
+      --muted: #8b939c;
+      --panel: #151a21;
+      --accent: #3dffa8;
+      --btn: #1f6feb;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Segoe UI", system-ui, sans-serif;
+      background: radial-gradient(1200px 600px at 20% -10%, #1a2740, var(--bg));
+      color: var(--fg);
+      display: grid;
+      place-items: center;
+      padding: 1.25rem;
+    }
+    main {
+      width: min(720px, 100%);
+      background: var(--panel);
+      border: 1px solid #2a3340;
+      border-radius: 16px;
+      padding: 1.5rem;
+    }
+    h1 { margin: 0 0 0.35rem; font-size: 1.35rem; }
+    p { margin: 0 0 1rem; color: var(--muted); line-height: 1.45; }
+    pre {
+      margin: 0 0 1rem;
+      padding: 1rem;
+      background: #0a0c10;
+      border: 1px solid #2a3340;
+      border-radius: 12px;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      word-break: break-word;
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+    button {
+      width: 100%;
+      border: 0;
+      border-radius: 12px;
+      padding: 0.95rem 1rem;
+      font-size: 1.05rem;
+      font-weight: 700;
+      cursor: pointer;
+      background: var(--btn);
+      color: white;
+    }
+    button.copied { background: var(--accent); color: #062016; }
+    .ok { margin-top: 0.85rem; color: var(--accent); min-height: 1.25rem; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Fluke — fix hosts + Tailscale</h1>
+    <p>On the Pi: tap <strong>Copy</strong>, open Terminal, paste, press Enter.</p>
+    <pre id="cmd">echo -e "127.0.0.1\tlocalhost\n127.0.1.1\t$(hostname)" | sudo tee /etc/hosts && sudo tailscale up</pre>
+    <button id="copy" type="button">Copy command</button>
+    <div class="ok" id="status" aria-live="polite"></div>
+  </main>
+  <script>
+    const cmd = document.getElementById("cmd").textContent.trim();
+    const btn = document.getElementById("copy");
+    const status = document.getElementById("status");
+    btn.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(cmd);
+        btn.textContent = "Copied";
+        btn.classList.add("copied");
+        status.textContent = "Paste in the Pi terminal, then press Enter.";
+        setTimeout(() => {
+          btn.textContent = "Copy command";
+          btn.classList.remove("copied");
+        }, 2500);
+      } catch {
+        status.textContent = "Clipboard blocked — select the command and copy manually.";
+      }
+    });
+  </script>
+</body>
+</html>

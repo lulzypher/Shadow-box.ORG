@@ -1,0 +1,27 @@
+{
+  "site": "shadow-box.org",
+  "blurb": "Little tools, hosted together.",
+  "projects": [
+    {
+      "id": "ship",
+      "title": "PrintParcel",
+      "path": "/apps/ship/",
+      "tag": "3D · shipping",
+      "summary": "Size Bambu prints, pick boxes, and source packing near Sterling Heights."
+    },
+    {
+      "id": "printers",
+      "title": "Build Lab",
+      "path": "/apps/printers/",
+      "tag": "3D · machines",
+      "summary": "Pick and plan a printer build — Sovol SV08 Max and Voron Trident helpers."
+    },
+    {
+      "id": "fluke",
+      "title": "Fluke fix",
+      "path": "/apps/fluke/",
+      "tag": "ops",
+      "summary": "One-tap hosts + Tailscale repair command for the Pi."
+    }
+  ]
+}
