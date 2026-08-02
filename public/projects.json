@@ -17,6 +17,13 @@
       "summary": "Pick and plan a printer build — Sovol SV08 Max and Voron Trident helpers."
     },
     {
+      "id": "skills",
+      "title": "3dEST Skill Tree",
+      "path": "/apps/skills/",
+      "tag": "3D · learning",
+      "summary": "Cinematic 3D skill tree — goals, quests, and learning paths."
+    },
+    {
       "id": "dns",
       "title": "ROOT ZONE",
       "path": "/apps/dns/",

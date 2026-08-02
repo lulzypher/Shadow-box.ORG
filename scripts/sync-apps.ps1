@@ -19,6 +19,12 @@ $Catalog = @(
     Id = "dns"
     Source = Join-Path $ProjectsRoot "dns-root-map"
     Base = "/apps/dns/"
+  },
+  @{
+    Id = "skills"
+    Source = Join-Path $ProjectsRoot "3dEST\3dExhaustiveSkillTree"
+    Base = "/apps/skills/"
+    Builder = "next"
   }
 )
 
@@ -39,18 +45,29 @@ foreach ($app in $Catalog) {
   try {
     if (-not (Test-Path "node_modules")) { npm install }
     $env:BASE_PATH = $app.Base
-    npm run build
-    if (-not (Test-Path "dist\index.html")) {
-      Write-Error "Build produced no dist/index.html for $($app.Id)"
+    $env:NEXT_PUBLIC_BASE_PATH = $app.Base.TrimEnd("/")
+    if ($app.Builder -eq "next") {
+      npm run build
+      $outDir = Join-Path $app.Source "out"
+      if (-not (Test-Path (Join-Path $outDir "index.html"))) {
+        Write-Error "Next build produced no out/index.html for $($app.Id)"
+      }
+    } else {
+      npm run build
+      $outDir = Join-Path $app.Source "dist"
+      if (-not (Test-Path (Join-Path $outDir "index.html"))) {
+        Write-Error "Build produced no dist/index.html for $($app.Id)"
+      }
     }
   } finally {
     Pop-Location
     Remove-Item Env:BASE_PATH -ErrorAction SilentlyContinue
+    Remove-Item Env:NEXT_PUBLIC_BASE_PATH -ErrorAction SilentlyContinue
   }
 
   if (Test-Path $dest) { Remove-Item -Recurse -Force $dest }
   Ensure-Dir $dest
-  Copy-Item -Path (Join-Path $app.Source "dist\*") -Destination $dest -Recurse -Force
+  Copy-Item -Path (Join-Path $outDir "*") -Destination $dest -Recurse -Force
   Write-Host ("  → {0}" -f $dest) -ForegroundColor Green
 }
 
