@@ -25,6 +25,11 @@ $Catalog = @(
     Source = Join-Path $ProjectsRoot "3dEST\3dExhaustiveSkillTree"
     Base = "/apps/skills/"
     Builder = "next"
+  },
+  @{
+    Id = "conspiracy"
+    Source = Join-Path $ProjectsRoot "ConspiracyMap"
+    Base = "/apps/conspiracy/"
   }
 )
 

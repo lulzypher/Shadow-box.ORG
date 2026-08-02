@@ -24,6 +24,13 @@
       "summary": "Cinematic 3D skill tree — goals, quests, and learning paths."
     },
     {
+      "id": "conspiracy",
+      "title": "Conspiracy Map",
+      "path": "/apps/conspiracy/",
+      "tag": "3D · graph",
+      "summary": "Interactive 3D force-graph mind map — rotate, zoom, and inspect linked nodes."
+    },
+    {
       "id": "dns",
       "title": "ROOT ZONE",
       "path": "/apps/dns/",
