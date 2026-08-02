@@ -14,6 +14,11 @@ $Catalog = @(
     Id = "printers"
     Source = Join-Path $ProjectsRoot "voron-trident-350-configurator"
     Base = "/apps/printers/"
+  },
+  @{
+    Id = "dns"
+    Source = Join-Path $ProjectsRoot "dns-root-map"
+    Base = "/apps/dns/"
   }
 )
 

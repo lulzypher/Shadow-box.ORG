@@ -17,6 +17,13 @@
       "summary": "Pick and plan a printer build — Sovol SV08 Max and Voron Trident helpers."
     },
     {
+      "id": "dns",
+      "title": "ROOT ZONE",
+      "path": "/apps/dns/",
+      "tag": "DNS · education",
+      "summary": "Interactive map of the ICANN DNS root — operators A–M, resolvers, and who actually talks to the roots."
+    },
+    {
       "id": "fluke",
       "title": "Fluke fix",
       "path": "/apps/fluke/",

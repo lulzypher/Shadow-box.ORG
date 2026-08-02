@@ -9,6 +9,7 @@ Hub for little projects. Each app lives in its own repo, then gets built into `p
 | `/` | Hub directory |
 | `/apps/ship/` | PrintParcel (bambu-ship-kit) |
 | `/apps/printers/` | Build Lab (voron-trident-350-configurator) |
+| `/apps/dns/` | ROOT ZONE (dns-root-map) |
 | `/apps/fluke/` | Pi hosts/Tailscale helper |
 | `/fluke/` | Legacy alias of Fluke helper |
 
