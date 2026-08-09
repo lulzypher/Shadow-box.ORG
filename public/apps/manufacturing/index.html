@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Manufacturing Map — shadow-box.org</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Oxanium:wght@500;600;700&family=Source+Sans+3:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <script type="module" crossorigin src="/apps/manufacturing/assets/index-BgVnLxTu.js"></script>
+    <link rel="stylesheet" crossorigin href="/apps/manufacturing/assets/index-6N2W9N6_.css">
+  </head>
+  <body>
+    <header class="chrome top">
+      <div class="brand-block">
+        <a class="hub-link" href="/">shadow-box</a>
+        <h1>Manufacturing Map</h1>
+      </div>
+      <p class="tagline">
+        3D printers → filament → feedstock → chemistry. Pick a node to light up its supply chain.
+
+      </p>
+      <div class="controls">
+        <label class="search-wrap">
+          <span class="sr-only">Search nodes</span>
+          <input id="search" type="search" placeholder="Search PLA, copper, NatureWorks…" autocomplete="off" />
+        </label>
+        <select id="type-filter" aria-label="Filter by type">
+          <option value="all">All types</option>
+        </select>
+        <label class="toggle pin-toggle" title="Pin factories and regions to a flat world map">
+          <input type="checkbox" id="pin-map" />
+          <span>Pin to world map</span>
+        </label>
+        <button type="button" id="btn-clear" class="ghost" disabled>Clear focus</button>
+        <button type="button" id="btn-help" class="ghost">How to use</button>
+      </div>
+    </header>
+
+    <div id="graph" role="img" aria-label="3D manufacturing knowledge graph"></div>
+
+    <aside id="detail" class="panel" hidden>
+      <button type="button" id="detail-close" class="panel-close" aria-label="Close detail">×</button>
+      <div id="detail-body"></div>
+    </aside>
+
+    <div id="legend" class="legend" aria-hidden="true"></div>
+
+    <footer class="chrome bottom">
+      <span class="hint-desktop">Drag rotate · Scroll zoom · Right-drag pan · Click a node to focus its links</span>
+      <span class="hint-mobile">Drag rotate · Pinch zoom · Tap a node to focus</span>
+      <span class="meta" id="stats"></span>
+    </footer>
+
+    <dialog id="help-dialog">
+      <form method="dialog" class="help-card">
+        <h2>How to navigate</h2>
+        <ul>
+          <li><strong>Click / tap</strong> a chemical, filament, factory, or feedstock to focus the camera and highlight every directly connected node (plus one more hop).</li>
+          <li><strong>Search</strong> jumps to a node by name or symbol (e.g. <code>PLA</code>, <code>Cu</code>, <code>Blair</code>).</li>
+          <li><strong>Type filter</strong> dims unrelated categories so you can scan elements vs factories.</li>
+          <li><strong>Pin to world map</strong> lays a flat Earth under the graph and locks factories/regions with known coordinates to their lat/lng. Other nodes stay force-linked and float nearby.</li>
+          <li>The detail panel shows description, location, materials, links, and a <strong>confidence</strong> badge.</li>
+        </ul>
+        <h3>What confidence means</h3>
+        <ul class="confidence-list">
+          <li><span class="badge high">high</span> Well-documented company / plant / chemistry path</li>
+          <li><span class="badge medium">medium</span> Credible industry knowledge; city/region may be approximate</li>
+          <li><span class="badge low">low</span> Best-effort or white-label / opaque supply; treat as a lead, not gospel</li>
+        </ul>
+        <p class="help-note">
+          This map is a learning scaffold, not a certified sourcing database. Factory addresses are only included when publicly stated by the company or reputable reporting — otherwise we use region-level nodes and mark uncertainty.
+        </p>
+        <button value="ok" class="primary">Got it</button>
+      </form>
+    </dialog>
+
+  </body>
+</html>

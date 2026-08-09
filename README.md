@@ -8,12 +8,13 @@ Hub for little projects. Each app lives in its own repo, then gets built into `p
 |------|-----|
 | `/` | Hub directory |
 | `/apps/ship/` | PrintParcel (bambu-ship-kit) |
-| `/apps/printers/` | Build Lab (voron-trident-350-configurator) |
+| `/apps/printers/` | 3D Printer Build lab (voron-trident-350-configurator) |
+| `/apps/manufacturing/` | Manufacturing Map (manufacturing-map) — filament → feedstock → periodic table |
 | `/apps/dns/` | ROOT ZONE (dns-root-map) |
 | `/apps/skills/` | 3dEST Skill Tree (3dExhaustiveSkillTree) |
-| `/apps/conspiracy/` | Conspiracy Map (ConspiracyMap) |
 | `/apps/fluke/` | Pi hosts/Tailscale helper |
 | `/fluke/` | Legacy alias of Fluke helper |
+| `/apps/cult-of-saturn/` | Cult of Saturn / FalseProphet field guide |
 
 ## Add a project
 

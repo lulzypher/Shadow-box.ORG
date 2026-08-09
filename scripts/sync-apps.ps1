@@ -16,6 +16,11 @@ $Catalog = @(
     Base = "/apps/printers/"
   },
   @{
+    Id = "manufacturing"
+    Source = Join-Path $ProjectsRoot "manufacturing-map"
+    Base = "/apps/manufacturing/"
+  },
+  @{
     Id = "dns"
     Source = Join-Path $ProjectsRoot "dns-root-map"
     Base = "/apps/dns/"
@@ -25,11 +30,6 @@ $Catalog = @(
     Source = Join-Path $ProjectsRoot "3dEST\3dExhaustiveSkillTree"
     Base = "/apps/skills/"
     Builder = "next"
-  },
-  @{
-    Id = "conspiracy"
-    Source = Join-Path $ProjectsRoot "ConspiracyMap"
-    Base = "/apps/conspiracy/"
   }
 )
 
@@ -87,6 +87,17 @@ if (Test-Path $flukeSrc) {
   Ensure-Dir (Join-Path $Hub "public\fluke")
   Copy-Item $flukeSrc (Join-Path $Hub "public\fluke\index.html") -Force
   Write-Host "  → apps/fluke + public/fluke (legacy URL)" -ForegroundColor Green
+}
+
+# Static Cult of Saturn / FalseProphet field guide
+$saturnSrc = Join-Path $Hub "cult-of-saturn\index.html"
+if (-not (Test-Path $saturnSrc)) {
+  $saturnSrc = Join-Path $Hub "public\apps\cult-of-saturn\index.html"
+}
+if (Test-Path $saturnSrc) {
+  Ensure-Dir (Join-Path $Apps "cult-of-saturn")
+  Copy-Item $saturnSrc (Join-Path $Apps "cult-of-saturn\index.html") -Force
+  Write-Host "  → apps/cult-of-saturn" -ForegroundColor Green
 }
 
 Write-Host "Done. Registry: public/projects.json" -ForegroundColor Green

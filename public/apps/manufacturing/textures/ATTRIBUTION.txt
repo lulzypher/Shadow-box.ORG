@@ -1,0 +1,4 @@
+earth-equirect.jpg
+Derived from NASA Blue Marble / Visible Earth imagery (public domain).
+Source chain commonly redistributed as “2_no_clouds_4k” (no clouds Earth).
+NASA imagery policy: https://www.nasa.gov/nasa-brand-center/images-and-media/
